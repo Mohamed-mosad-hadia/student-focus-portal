@@ -71,3 +71,22 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Running the Django backend
+
+The backend lives inside the `backend/` directory and uses Django REST Framework.
+To run it locally:
+
+```sh
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py loaddata api/fixtures/initial_data.json  # optional test data
+python manage.py createsuperuser  # create an admin account
+python manage.py runserver
+```
+
+The API will be available at `http://localhost:8000/api/` and supports token
+authentication via `POST /api/token/` with `username` and `password`.
